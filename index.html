@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html>
+<link rel="stylesheet" href="public/css/main.css">
+<body> 
+
+<div style="text-align:center"> 
+  <video id="video1" width="85%">
+    <source src="/public/asset/d.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <button class="btn" onclick="playPause()">Play/Pause</button> 
+  <button class="btn" onclick="switchSrc()">Normal</button>
+</div> 
+
+<script> 
+var myVideo = document.getElementById("video1"); 
+var playing = 1;
+
+function playPause() { 
+  if (myVideo.paused) 
+    myVideo.play(); 
+  else 
+    myVideo.pause(); 
+} 
+
+function switchSrc() {
+    myVideo.src = "/public/asset/fcc.mp4";
+    myVideo.play(); 
+    playing = 2;
+}
+
+myVideo.onended = function() {
+    if(playing == 2){
+        myVideo.src = "/public/asset/d.mp4";
+        myVideo.load();
+        myVideo.play();
+    }
+};
+
+</script> 
+
+</body> 
+</html>
