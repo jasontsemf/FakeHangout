@@ -33,22 +33,21 @@ void setup() {
 }
 
 void loop() {
-
-
   if (irrecv.decode(&results)) {
     Serial.println(results.value, HEX);
     if (results.value == 2704) {
       digitalWrite(servopin, HIGH);
       delayMicroseconds(pulse);
       digitalWrite(servopin, LOW);
-      for (pos = 0; pos <= 20; pos += 1) { // goes from 0 degrees to 180 degrees
+      for (pos = 0; pos <= 25; pos += 1) { // goes from 0 degrees to 180 degrees
         // in steps of 1 degree
         myservo.write(pos);              // tell servo to go to position in variable 'pos'
-        delay(30);                       // waits 15ms for the servo to reach the position
+        delay(5);                       // waits 15ms for the servo to reach the position
       }
-      for (pos = 20; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+      delay(300);
+      for (pos = 25; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
         myservo.write(pos);              // tell servo to go to position in variable 'pos'
-        delay(30);                       // waits 15ms for the servo to reach the position
+        delay(5);                       // waits 15ms for the servo to reach the position
       }
       //      irrecv.resume(); // Receive the next value
     }

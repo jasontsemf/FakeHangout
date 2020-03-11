@@ -1,43 +1,55 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="public/css/main.css">
-<body> 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-<div style="text-align:center"> 
-  <video id="video1" width="85%">
-    <source src="/public/asset/d.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
-  <button class="btn" onclick="playPause()">Play/Pause</button> 
-  <button class="btn" onclick="switchSrc()">Normal</button>
-</div> 
+<body>
 
-<script> 
-var myVideo = document.getElementById("video1"); 
-var playing = 1;
+  <div style="text-align:center">
+    <video id="video1" width="100%" onclick="switchSrc(this.id)" autoplay>
+      <source src="/public/asset/trim.mov" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
 
-function playPause() { 
-  if (myVideo.paused) 
-    myVideo.play(); 
-  else 
-    myVideo.pause(); 
-} 
+  <script>
+    var myVideo = document.getElementById("video1");
+    var playing = 1;
+    var src = [
+      "/public/asset/03101.mov",
+      "/public/asset/03102.mov",
+      "/public/asset/03103.mov",
+      "/public/asset/03104.mov",
+      "/public/asset/03105.mov"
+    ];
 
-function switchSrc() {
-    myVideo.src = "/public/asset/fcc.mp4";
-    myVideo.play(); 
-    playing = 2;
-}
+    function switchSrc(id) {
+      vid = document.getElementById(id);
+      choice = (getRandomInt(src.length));
+      myVideo.src = src[choice];
+      myVideo.play();
+      playing = 2;
+    }
 
-myVideo.onended = function() {
-    if(playing == 2){
-        myVideo.src = "/public/asset/d.mp4";
+    myVideo.onended = function () {
+      if (playing == 2) {
+        myVideo.src = "/public/asset/trim.mov";
         myVideo.load();
         myVideo.play();
+        playing = 1;
+      }
+      if (playing == 1) {
+        myVideo.load();
+        myVideo.play();
+      }
     }
-};
 
-</script> 
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+  </script>
 
-</body> 
+</body>
+
 </html>
